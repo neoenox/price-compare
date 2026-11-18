@@ -43,7 +43,25 @@ jobs:
         run: flutter pub get
 
       - name: Check formatting
-        run: dart format --output=none --set-exit-if-changed lib test || echo "::warning::Formatting check skipped - some files need formatting"
+        run: dart format --output=none --set-exit-if-changed lib test
+
+      - name: Generate formatter snapshots (temporary audit step)
+        if: always()
+        run: |
+          mkdir -p /tmp/dart-format-snapshot
+          dart format --output=show lib/providers/price_compare_provider.dart > /tmp/dart-format-snapshot/price_compare_provider.dart
+          dart format --output=show lib/ui/input_screen.dart > /tmp/dart-format-snapshot/input_screen.dart
+          dart format --output=show test/engine/decimal_test.dart > /tmp/dart-format-snapshot/decimal_test.dart
+          dart format --output=show test/engine/purchase_context_test.dart > /tmp/dart-format-snapshot/purchase_context_test.dart
+          dart format --output=show test/engine/quantity_test.dart > /tmp/dart-format-snapshot/quantity_test.dart
+          dart format --output=show test/engine/unit_normalizer_test.dart > /tmp/dart-format-snapshot/unit_normalizer_test.dart
+
+      - name: Upload formatter snapshots (temporary audit step)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dart-format-snapshot
+          path: /tmp/dart-format-snapshot/
 
       - name: Analyze
         run: flutter analyze --fatal-infos

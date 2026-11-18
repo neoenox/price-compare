@@ -59,7 +59,8 @@ void main() {
 
     group('effectiveShipping', () {
       test('shippingCostがnullの場合はnullを返す', () {
-        final context = PurchaseContext(freeShippingThreshold: Money.of('3000'));
+        final context =
+            PurchaseContext(freeShippingThreshold: Money.of('3000'));
         expect(context.effectiveShipping(Money.of('5000')), isNull);
       });
 
