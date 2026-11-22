@@ -12,31 +12,37 @@ void main() {
 
     group('normalize', () {
       test('グラムはそのまま', () {
-        final q = Quantity(value: Decimal('500'), unit: ComparisonUnit.gram).normalize();
+        final q = Quantity(value: Decimal('500'), unit: ComparisonUnit.gram)
+            .normalize();
         expect(q.value.toPlainString(), '500');
         expect(q.unit, ComparisonUnit.gram);
       });
 
       test('キログラムをグラムに変換する', () {
-        final q = Quantity(value: Decimal('2'), unit: ComparisonUnit.kilogram).normalize();
+        final q = Quantity(value: Decimal('2'), unit: ComparisonUnit.kilogram)
+            .normalize();
         expect(q.value.toPlainString(), '2000');
         expect(q.unit, ComparisonUnit.gram);
       });
 
       test('ミリリットルはそのまま', () {
-        final q = Quantity(value: Decimal('350'), unit: ComparisonUnit.milliliter).normalize();
+        final q =
+            Quantity(value: Decimal('350'), unit: ComparisonUnit.milliliter)
+                .normalize();
         expect(q.value.toPlainString(), '350');
         expect(q.unit, ComparisonUnit.milliliter);
       });
 
       test('リットルをミリリットルに変換する', () {
-        final q = Quantity(value: Decimal('1.5'), unit: ComparisonUnit.liter).normalize();
+        final q = Quantity(value: Decimal('1.5'), unit: ComparisonUnit.liter)
+            .normalize();
         expect(q.value.toPlainString(), '1500');
         expect(q.unit, ComparisonUnit.milliliter);
       });
 
       test('個はそのまま', () {
-        final q = Quantity(value: Decimal('3'), unit: ComparisonUnit.count).normalize();
+        final q = Quantity(value: Decimal('3'), unit: ComparisonUnit.count)
+            .normalize();
         expect(q.value.toPlainString(), '3');
         expect(q.unit, ComparisonUnit.count);
       });
@@ -49,9 +55,10 @@ void main() {
         expect(gram.isCompatibleWith(kg), isTrue);
       });
 
-      test('異なる次元の単位は互換性がない', () {
+      test('異なる次元の単位は比較不可', () {
         final gram = Quantity(value: Decimal('500'), unit: ComparisonUnit.gram);
-        final ml = Quantity(value: Decimal('500'), unit: ComparisonUnit.milliliter);
+        final ml =
+            Quantity(value: Decimal('500'), unit: ComparisonUnit.milliliter);
         expect(gram.isCompatibleWith(ml), isFalse);
       });
 

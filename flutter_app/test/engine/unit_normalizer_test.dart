@@ -16,7 +16,8 @@ void main() {
 
       test('異なる次元の単位は比較不可', () {
         final a = Quantity(value: Decimal('500'), unit: ComparisonUnit.gram);
-        final b = Quantity(value: Decimal('500'), unit: ComparisonUnit.milliliter);
+        final b =
+            Quantity(value: Decimal('500'), unit: ComparisonUnit.milliliter);
         expect(UnitNormalizer.areComparable(a, b), isFalse);
       });
     });
@@ -33,7 +34,8 @@ void main() {
       test('100gあたりの単価を計算する（kg→g変換）', () {
         final price = UnitNormalizer.calculateUnitPrice(
           price: Money.of('1000'),
-          quantity: Quantity(value: Decimal('2'), unit: ComparisonUnit.kilogram),
+          quantity:
+              Quantity(value: Decimal('2'), unit: ComparisonUnit.kilogram),
         );
         expect(price?.toPlainString(), '50');
       });
