@@ -109,8 +109,9 @@ void main() {
 
       test('divideで結果スケールを指定する', () {
         expect(
-            Decimal('1').divide(Decimal('3'), resultScale: 2).toPlainString(),
-            '0.33');
+          Decimal('1').divide(Decimal('3'), resultScale: 2).toPlainString(),
+          '0.33',
+        );
       });
 
       test('0除算で例外を投げる', () {
