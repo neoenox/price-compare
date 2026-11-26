@@ -376,9 +376,7 @@ String? _validateDecimal(
   try {
     final decimal = Decimal(value.trim());
     if (allowZero ? decimal < Decimal.zero : decimal <= Decimal.zero) {
-      return allowZero
-          ? '$labelは0以上で入力してください'
-          : '$labelは0より大きい値を入力してください';
+      return allowZero ? '$labelは0以上で入力してください' : '$labelは0より大きい値を入力してください';
     }
     return null;
   } on FormatException {

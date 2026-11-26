@@ -61,9 +61,8 @@ class PurchaseContextInput {
     this.earnedPoints = '',
   });
 
-  bool get hasAny =>
-      [shippingCost, couponAmount, usedPoints, earnedPoints]
-          .any((value) => value.isNotEmpty);
+  bool get hasAny => [shippingCost, couponAmount, usedPoints, earnedPoints]
+      .any((value) => value.isNotEmpty);
 
   PurchaseContextInput copyWith({
     String? shippingCost,
@@ -187,9 +186,7 @@ class PriceCompareNotifier extends StateNotifier<PriceCompareState> {
     final amount = Decimal(value);
     if (amount < Decimal.zero) {
       throw ArgumentError(
-        input.discountIsPercent
-            ? '割引率は0〜100%で入力してください'
-            : '割引額は0以上で入力してください',
+        input.discountIsPercent ? '割引率は0〜100%で入力してください' : '割引額は0以上で入力してください',
       );
     }
     if (amount.isZero) return const [];
